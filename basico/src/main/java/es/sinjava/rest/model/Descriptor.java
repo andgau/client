@@ -11,9 +11,9 @@ public class Descriptor {
 	private String rt;
 	private String id;
 	private URL href;
-	
+
 	private Map<String, String> doc;
-	
+
 	private List<Descriptor> descriptors;
 
 	public String getName() {
@@ -56,7 +56,6 @@ public class Descriptor {
 		this.descriptors = descriptors;
 	}
 
-
 	public String getId() {
 		return id;
 	}
@@ -72,6 +71,7 @@ public class Descriptor {
 	public void setHref(URL href) {
 		this.href = href;
 	}
+
 	@Override
 	public String toString() {
 		return "Descriptor [name=" + name + ", type=" + type + ", rt=" + rt

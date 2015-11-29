@@ -3,7 +3,7 @@ package es.sinjava.rest.model;
 import java.net.URL;
 
 public class Item {
-	
+
 	private URL href;
 	private boolean templated;
 
