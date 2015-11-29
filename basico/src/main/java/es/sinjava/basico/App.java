@@ -24,7 +24,7 @@ import es.sinjava.rest.model.Item;
 import es.sinjava.rest.model.ModelHateoas;
 
 public class App {
-	public static void main(String... args) throws ClientHandlerException,
+	public static void main(String[] args) throws ClientHandlerException,
 			UniformInterfaceException, IOException {
 
 		String destiny = "http://localhost:8888/";
