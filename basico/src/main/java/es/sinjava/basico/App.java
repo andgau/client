@@ -23,16 +23,18 @@ import es.sinjava.rest.model.HateoasRoot;
 import es.sinjava.rest.model.Item;
 import es.sinjava.rest.model.ModelHateoas;
 
-/**
- * Hello world!
- *
- */
 public class App {
-	public static void main(String[] args) throws ClientHandlerException,
+	public static void main(String... args) throws ClientHandlerException,
 			UniformInterfaceException, IOException {
+
+		String destiny = "http://localhost:8888/";
+		if (args != null && args.length > 1 && args[0] != null) {
+			System.out.println("Capturada la url");
+			destiny = args[0];
+		}
 		Client client = Client.create();
 
-		WebResource webResource = client.resource("http://localhost:8888/");
+		WebResource webResource = client.resource(destiny);
 		ObjectMapper om = new ObjectMapper();
 
 		ClientResponse response2 = webResource.accept("application/json").get(
