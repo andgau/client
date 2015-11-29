@@ -1,0 +1,98 @@
+{
+  "alps" : {
+    "version" : "1.0",
+      "id" : "city-representation",
+      "href" : "http://localhost:8888/profile/city",
+      "descriptors" : [ {
+        "name" : "name",
+        "type" : "SEMANTIC"
+      }, {
+        "name" : "state",
+        "type" : "SEMANTIC"
+      }, {
+        "name" : "country",
+        "type" : "SEMANTIC"
+      }, {
+        "name" : "map",
+        "type" : "SEMANTIC"
+      }, {
+        "name" : "hotels",
+        "type" : "SAFE",
+        "rt" : "http://localhost:8888/profile/hotel#hotel-representation"
+      } ]
+    }, {
+      "id" : "get-city",
+      "name" : "city",
+      "type" : "SAFE",
+      "rt" : "#city-representation",
+      "descriptors" : [ {
+        "name" : "page",
+        "doc" : {
+          "value" : "The page to return.",
+          "format" : "TEXT"
+        },
+        "type" : "SEMANTIC"
+      }, {
+        "name" : "size",
+        "doc" : {
+          "value" : "The size of the page to return.",
+          "format" : "TEXT"
+        },
+        "type" : "SEMANTIC"
+      }, {
+        "name" : "sort",
+        "doc" : {
+          "value" : "The sorting criteria to use to calculate the content of the page.",
+          "format" : "TEXT"
+        },
+        "type" : "SEMANTIC"
+      } ]
+    }, {
+      "id" : "create-city",
+      "name" : "city",
+      "type" : "UNSAFE",
+      "rt" : "#city-representation"
+    }, {
+      "id" : "get-city",
+      "name" : "city",
+      "type" : "SAFE",
+      "rt" : "#city-representation"
+    }, {
+      "id" : "delete-city",
+      "name" : "city",
+      "type" : "IDEMPOTENT",
+      "rt" : "#city-representation"
+    }, {
+      "id" : "patch-city",
+      "name" : "city",
+      "type" : "UNSAFE",
+      "rt" : "#city-representation"
+    }, {
+      "id" : "update-city",
+      "name" : "city",
+      "type" : "IDEMPOTENT",
+      "rt" : "#city-representation"
+    }, {
+      "name" : "findByCountryAllIgnoringCase",
+      "type" : "SAFE",
+      "descriptors" : [ {
+        "name" : "country",
+        "type" : "SEMANTIC"
+      } ]
+    }, {
+      "name" : "findByName",
+      "type" : "SAFE",
+      "descriptors" : [ {
+        "name" : "name",
+        "type" : "SEMANTIC"
+      } ]
+    }, {
+      "name" : "findByCountry",
+      "type" : "SAFE",
+      "descriptors" : [ {
+        "name" : "country",
+        "type" : "SEMANTIC"
+      } ]
+    } ]
+  }
+}
