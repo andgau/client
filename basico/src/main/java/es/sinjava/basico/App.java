@@ -1,12 +1,20 @@
 package es.sinjava.basico;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
@@ -96,6 +104,16 @@ public class App {
 				}
 			}
 		}
+		File tempFile = File.createTempFile("echo", "");
+		InputStream fis = App.class.getClassLoader().getResourceAsStream(
+				"logback.xml");
+		Writer writer = new FileWriter(tempFile);
+		IOUtils.copy(fis, writer);
+		writer.flush();
+		writer.close();
+		System.out.println();
+
+		// FileUtils.copyDirectory("classpath:webappp", "webpapa");
 		System.out.println("Sacabao" + dinamicBeanList.size());
 	}
 
