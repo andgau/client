@@ -24,7 +24,7 @@ import es.sinjava.rest.model.Item;
 import es.sinjava.rest.model.ModelHateoas;
 
 public class App {
-	public static void main(String[] args) throws ClientHandlerException,
+	public static void main(String... args) throws ClientHandlerException,
 			UniformInterfaceException, IOException {
 
 		String destiny = "http://localhost:8888/";
@@ -33,7 +33,6 @@ public class App {
 			destiny = args[0];
 		}
 		Client client = Client.create();
-
 		WebResource webResource = client.resource(destiny);
 		ObjectMapper om = new ObjectMapper();
 
