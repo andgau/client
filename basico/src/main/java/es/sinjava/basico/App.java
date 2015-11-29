@@ -111,9 +111,24 @@ public class App {
 		IOUtils.copy(fis, writer);
 		writer.flush();
 		writer.close();
-		System.out.println();
+		fis.close();
+		System.out.println("____________");
+		
 
-		// FileUtils.copyDirectory("classpath:webappp", "webpapa");
+		File origen = File.createTempFile("mola", ".xml");
+		InputStream folder = App.class.getClassLoader().getResourceAsStream(
+				"logback.xml");
+		Writer writerfolder = new FileWriter(origen);
+		IOUtils.copy(folder, writerfolder);
+		writerfolder.flush();
+		writerfolder.close();
+		folder.close();
+		System.out.println("Mordor dice");
+
+		
+		File nuevoArchi = FileUtils.getUserDirectory();
+	
+		FileUtils.copyFileToDirectory(origen, nuevoArchi);
 		System.out.println("Sacabao" + dinamicBeanList.size());
 	}
 
