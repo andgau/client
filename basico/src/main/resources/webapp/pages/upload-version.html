@@ -1,0 +1,50 @@
+<div class="row">
+    <!--Sidebar-->
+    <ng-include src="'pages/common/sidebar.html'"></ng-include>
+    <!--/Sidebar-->
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Nueva versiÛn de la aplicaciÛn</h3></div>
+            <div class="col-md-12">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="version" class="col-md-2 control-label">Versi√≥n</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="version" placeholder="1.5.1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="apk" class="col-md-2 control-label">APK</label>
+                        <div class="col-md-10">
+                            <input type="file" class="form-control" id="apk">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="novedades" class="col-md-2 control-label">Novedades</label>
+                        <div class="col-md-10">
+                            <textarea id="novedades" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="novedades" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value=""> Forzar actualizaci√≥n de todos los dispositivos
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <button type="button" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-upload"></span> Subir versi√≥n
+                            </button>
+                            <a href="#/application" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

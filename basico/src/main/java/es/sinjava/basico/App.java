@@ -32,8 +32,7 @@ import es.sinjava.rest.model.Item;
 import es.sinjava.rest.model.ModelHateoas;
 
 public class App {
-	public static void main(String... args) throws ClientHandlerException,
-			UniformInterfaceException, IOException {
+	public static void main(String... args) throws ClientHandlerException, UniformInterfaceException, IOException {
 
 		String destiny = "http://localhost:8888/";
 		if (args != null && args.length > 1 && args[0] != null) {
@@ -44,96 +43,71 @@ public class App {
 		WebResource webResource = client.resource(destiny);
 		ObjectMapper om = new ObjectMapper();
 
-		ClientResponse response2 = webResource.accept("application/json").get(
-				ClientResponse.class);
+		ClientResponse response2 = webResource.accept("application/json").get(ClientResponse.class);
 		if (response2.getStatus() != 200) {
-			throw new RuntimeException("Failed : HTTP error code : "
-					+ response2.getStatus());
+			throw new RuntimeException("Failed : HTTP error code : " + response2.getStatus());
 		}
-		HateoasRoot hateoas = om.readValue(response2.getEntity(String.class),
-				HateoasRoot.class);
+		HateoasRoot hateoas = om.readValue(response2.getEntity(String.class), HateoasRoot.class);
 		System.out.println(" Recibidos " + hateoas.get_links().size());
 		for (Entry<String, Item> item : hateoas.get_links().entrySet()) {
-			System.out.println("-> " + item.getKey() + " - "
-					+ item.getValue().getHref());
+			System.out.println("-> " + item.getKey() + " - " + item.getValue().getHref());
 		}
 		// REcuperamos los descriptores del profile:
 
 		URL profileURL = hateoas.get_links().get("profile").getHref();
 		WebResource webResource2 = client.resource(profileURL.toString());
-		ClientResponse profileResponse = webResource2
-				.accept("application/json").get(ClientResponse.class);
+		ClientResponse profileResponse = webResource2.accept("application/json").get(ClientResponse.class);
 
 		if (profileResponse.getStatus() != 200) {
-			throw new RuntimeException("Failed : HTTP error code : "
-					+ profileResponse.getStatus());
+			throw new RuntimeException("Failed : HTTP error code : " + profileResponse.getStatus());
 		}
-		HateoasRoot profiles = om.readValue(
-				profileResponse.getEntity(String.class), HateoasRoot.class);
+		HateoasRoot profiles = om.readValue(profileResponse.getEntity(String.class), HateoasRoot.class);
 		System.out.println(profiles.get_links().size());
 		profiles.get_links().remove("self");
 		System.out.println(profiles.get_links().size());
 
 		Map<String, Alps> mapaModels = new HashMap<>();
 
-		for (Entry<String, Item> hateoasEntitys : profiles.get_links()
-				.entrySet()) {
-			webResource2 = client.resource(hateoasEntitys.getValue().getHref()
-					.toString());
-			profileResponse = webResource2.accept("application/json").get(
-					ClientResponse.class);
+		for (Entry<String, Item> hateoasEntitys : profiles.get_links().entrySet()) {
+			webResource2 = client.resource(hateoasEntitys.getValue().getHref().toString());
+			profileResponse = webResource2.accept("application/json").get(ClientResponse.class);
 			if (profileResponse.getStatus() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ profileResponse.getStatus());
+				throw new RuntimeException("Failed : HTTP error code : " + profileResponse.getStatus());
 			}
-			ModelHateoas model = om
-					.readValue(profileResponse.getEntity(String.class),
-							ModelHateoas.class);
+			ModelHateoas model = om.readValue(profileResponse.getEntity(String.class), ModelHateoas.class);
 			mapaModels.put(hateoasEntitys.getKey(), model.getAlps());
 		}
 
 		List<DinamicBean> dinamicBeanList = new ArrayList<>();
 		for (String fieldSelected : mapaModels.keySet()) {
-			for (Descriptor item : mapaModels.get(fieldSelected)
-					.getDescriptors()) {
+			for (Descriptor item : mapaModels.get(fieldSelected).getDescriptors()) {
 				if (item.getType() == null && item.getDescriptors() != null) {
 					System.out.println(item);
-					DinamicBean dinamicBean = dinamicBeanForDescriptor(
-							fieldSelected, hateoas.get_links(), item);
+					DinamicBean dinamicBean = dinamicBeanForDescriptor(fieldSelected, hateoas.get_links(), item);
 					dinamicBeanList.add(dinamicBean);
 				}
 			}
 		}
-		File tempFile = File.createTempFile("echo", "");
-		InputStream fis = App.class.getClassLoader().getResourceAsStream(
-				"logback.xml");
-		Writer writer = new FileWriter(tempFile);
-		IOUtils.copy(fis, writer);
-		writer.flush();
-		writer.close();
-		fis.close();
-		System.out.println("____________");
+		String classPath = ".//webapp//css";
+		volcarArchivo(classPath,"//pikolin.css", "//bootstrap.min.css", "//bootstrap-datepicker.min.css");
 		
-
-		File origen = File.createTempFile("mola", ".xml");
-		InputStream folder = App.class.getClassLoader().getResourceAsStream(
-				"logback.xml");
-		Writer writerfolder = new FileWriter(origen);
-		IOUtils.copy(folder, writerfolder);
-		writerfolder.flush();
-		writerfolder.close();
-		folder.close();
-		System.out.println("Mordor dice");
-
-		
-		File nuevoArchi = FileUtils.getUserDirectory();
-	
-		FileUtils.copyFileToDirectory(origen, nuevoArchi);
 		System.out.println("Sacabao" + dinamicBeanList.size());
 	}
 
-	private static DinamicBean dinamicBeanForDescriptor(String fieldSelected,
-			Map<String, Item> urls, Descriptor desc) {
+	private static void volcarArchivo(String classPath, String... archivos) throws IOException {
+		new File(classPath).mkdirs();
+		for (String archivo : archivos) {
+			String classPathFile = classPath + archivo;
+			InputStream cssFile = App.class.getClassLoader().getResourceAsStream(classPathFile);
+			Writer writerfolder = new FileWriter(classPathFile);
+			IOUtils.copy(cssFile, writerfolder);
+			cssFile.close();
+			writerfolder.flush();
+			writerfolder.close();
+		}
+	}
+
+	private static DinamicBean dinamicBeanForDescriptor(String fieldSelected, Map<String, Item> urls, Descriptor desc) {
 		DinamicBean db = new DinamicBean();
 		db.setName(fieldSelected);
 		db.setUrl(urls.get(fieldSelected).getHref());

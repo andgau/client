@@ -1,0 +1,125 @@
+<div class="row">
+    <!--Sidebar-->
+    <ng-include src="'pages/common/sidebar.html'"></ng-include>
+    <!--/Sidebar-->
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Aplicación</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="#/upload-version" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-upload"></span> Subir aplicación
+                </a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>Versión actual</strong></h5>
+                        <span>{{currentVersion.version}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>Fecha de subida</strong></h5>
+                        <span>{{currentVersion.dateUploaded}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>Dipositivos con versión</strong></h5>
+                        <span>{{currentVersion.devicesForEachVersion}} / {{currentVersion.totalDevices}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>URL descarga</strong></h5>
+                        <a id="urlLastVersion" href="{{currentVersion.url}}" target="_blank">{{currentVersion.url}}</a>
+                        <span id="iconCopyURL" class="glyphicon glyphicon-copy pull-right"></span>
+                    </div>
+                </div>
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>Novedades</strong></h5>
+                        <ul>
+                            <li ng-repeat="new in currentVersion.news">{{new}}</li>                            
+                        </ul>
+                    </div>
+                </div>
+                <h3>Otras versiones</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Versión</th>
+                                <th>Fecha de subida</th>
+                                <th>Dispositivos con versión</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="version in versions">
+                                <td>{{version.version}}</td>
+                                <td>{{version.dateUploaded}}</td>
+                                <td>{{version.devicesForEachVersion}} / {{version.totalDevices}}</td>
+                                <td>
+                                    <a ng-click="showVersionDetail(version.version);" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-plus"></span> info
+                                    </a>
+                                </td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal detalle version-->
+<div class="modal fade" id="modalVersionDetail" tabindex="-1" role="dialog" aria-labelledby="modalVersionDetail">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Detalle versión</h4>
+            </div>
+            <div class="modal-body">
+                <dl>
+                    <dt>Versión actual</dt>
+                    <dd>{{versionDetail.version}}</dd>
+                    <dt>Fecha de subida</dt>
+                    <dd>{{versionDetail.dateUploaded}}</dd>
+                    <dt>Dipositivos con versión</dt>
+                    <dd>{{versionDetail.devicesForEachVersion}} / {{versionDetail.totalDevices}}</dd>
+                    <dt>URL descarga</dt>
+                    <dd>
+                        <a href="{{versionDetail.url}}" target="_blank">{{versionDetail.url}}</a>
+                    </dd>
+                    <dt>Novedades</dt>
+                    <dd>
+                        <ul>
+                            <li ng-repeat="new in versionDetail.news">{{new}}</li>  
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ Modal detalle version-->

@@ -1,0 +1,251 @@
+<div class="row">
+    <!--Sidebar-->
+    <ng-include src="'pages/common/sidebar.html'"></ng-include>
+    <!--/Sidebar-->
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Rutas</h3>
+            </div>
+            <form>
+                <div class="col-md-6 form-group">
+                    <div class="row">
+                        <label class="col-md-12">Fecha</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" placeholder="dd/mm/aaaa" />
+                                <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Almacén</label>
+                    <select class="form-control">
+                        <option selected="" value="33">33</option>
+                        <option value="39">39</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+                <div class="col-md-6 form-group">
+                    <div class="row">
+                        <label class="col-md-6">Ruta</label>
+                        <label class="col-md-6">Vehículo</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <select class="form-control">
+                                <option value="917995">917995</option>
+                                <option value="918015">918015</option>
+                                <option value="918072">918072</option>
+                                <option value="918109">918109</option>
+                                <option value="918168">918168</option>
+                                <option value="918229">918229</option>
+                                <option value="918231">918231</option>
+                                <option value="918247">918247</option>
+                                <option value="918318">918318</option>
+                                <option value="918372">918372</option>
+                                <option value="918390">918390</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control">
+                                <option value="45454545">45454545</option>
+                                <option value="68468468">68468468</option>
+                                <option value="85484688">85484688</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <div class="row">
+                        <label class="col-md-6">&nbsp;</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-primary">
+                                Aplicar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>Estado de la ruta</strong></h5>
+                        <span>En proceso</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>Estado de las paradas</strong></h5>
+                        <span>2 Abiertas
+                                        2 Cerradas
+                                        1 Cerradas (inc.)
+                                    </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>Kilómetros reportados</strong></h5>
+                        <span>(a espera de cierre)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>Kilómetros reales</strong></h5>
+                        <span>430 km</span>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Ver en el mapa
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>Kilómetros estimados</strong></h5>
+                        <span>620 km</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>Lectura ultima posisión</strong></h5>
+                        <span>12:30 h.</span>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-refresh"> </span> Actualizar</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="map-container" class="col-md-12"></div>
+        </div>
+        <br>
+        <br>
+    </div>
+</div>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBGUAspCCC0nfLvAz1yFloVTdxfucXb7I8&sensor=FALSE">
+</script>
+<script type="text/javascript">
+var start = null;
+var finish = null;
+var stop1 = null;
+var stop2 = null;
+var stop3 = null;
+var stop4 = null;
+var stop5 = null;
+var current = null;
+
+
+function inicializar_mapa() {
+    var mapOptions = {
+        center: new google.maps.LatLng(40.917777, -1.268473),
+        zoom: 8,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map-container"),
+        mapOptions);
+
+    var posStart = new google.maps.LatLng(41.655106, -0.990755);
+    var posFinish = new google.maps.LatLng(40.345240, -1.106468);
+
+    var posStop1 = new google.maps.LatLng(41.551868, -0.985575);
+    var posStop2 = new google.maps.LatLng(41.333627, -1.199809);
+    var posStop3 = new google.maps.LatLng(40.909475, -1.290446);
+    var posStop4 = new google.maps.LatLng(40.772336, -1.306925);
+    var posStop5 = new google.maps.LatLng(40.620321, -1.331645);
+
+    var posCurrent = new google.maps.LatLng(41.079465, -1.290446);
+    start = new google.maps.Marker({
+        position: posStart,
+        map: map,
+        title: "Esto es un marcador",
+        animation: google.maps.Animation.DROP
+    });
+
+    start.setIcon('img/markers/start.png');
+
+    finish = new google.maps.Marker({
+        position: posFinish,
+        map: map,
+        title: "Esto es un marcador",
+        animation: google.maps.Animation.DROP
+    });
+
+    finish.setIcon('img/markers/finish.png');
+
+
+
+    stop1 = new google.maps.Marker({
+        position: posStop1,
+        map: map,
+        title: "Esto es un marcador",
+        animation: google.maps.Animation.DROP
+    });
+
+    stop1.setIcon('img/markers/gray/number_1.png');
+
+    stop2 = new google.maps.Marker({
+        position: posStop2,
+        map: map,
+        title: "Esto es un marcador",
+        animation: google.maps.Animation.DROP
+    });
+
+    stop2.setIcon('img/markers/red/number_2.png');
+
+    stop3 = new google.maps.Marker({
+        position: posStop3,
+        map: map,
+        title: "Esto es un marcador",
+        animation: google.maps.Animation.DROP
+    });
+
+    stop3.setIcon('img/markers/gray/number_3.png');
+
+    stop4 = new google.maps.Marker({
+        position: posStop4,
+        map: map,
+        title: "Esto es un marcador",
+        animation: google.maps.Animation.DROP
+    });
+
+    stop4.setIcon('img/markers/green/number_4.png');
+
+    stop5 = new google.maps.Marker({
+        position: posStop5,
+        map: map,
+        title: "Esto es un marcador",
+        animation: google.maps.Animation.DROP
+    });
+
+    stop5.setIcon('img/markers/green/number_5.png');
+
+    current = new google.maps.Marker({
+        position: posCurrent,
+        map: map,
+        title: "Esto es un marcador",
+        animation: google.maps.Animation.DROP
+    });
+
+    current.setIcon('img/markers/current.png');
+
+}
+</script>

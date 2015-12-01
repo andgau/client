@@ -1,0 +1,144 @@
+
+.navbar-static-top {
+ /* margin-bottom: 19px;*/
+}
+
+.top-navbar {
+  background: url(../img/header_bg_es.gif) repeat-x; 
+}
+
+.navbar-title {
+	margin-top: 12px;
+	font-weight: 700;
+}
+
+#iconCopyURL {
+	cursor: pointer;
+}
+
+.container {
+ padding-right: 15px;
+  padding-left: 0px;
+  margin-right: auto;
+ margin-left: 12px;
+}
+
+.navbar {
+  position: relative;
+  min-height: 75px;
+  margin-bottom: 0px;
+  border: 1px solid transparent;
+}
+
+.navbar-collapse {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-bottom: 5px;
+  overflow-x: visible;
+  -webkit-overflow-scrolling: touch;
+  border-top: 1px solid transparent;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
+}
+
+.container-fluid > .navbar-collapse {
+  margin-right: -15px;
+  margin-left: -15px;
+  padding-left: 15px;
+}
+
+.navbar-right {
+    float: right !important;
+    margin-right: 0px;
+  }
+
+
+.well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 0px;
+  background-color: #434342;
+}
+
+#leftCol{
+	margin-left: -15px;
+}
+
+#leftCol ul li a {
+  color: white;
+}
+#leftCol ul li a:hover {
+  color: #434342;
+}
+
+.row {
+  margin-right: -15px;
+  margin-left: -15px; 
+}
+
+.jumbotron {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  color: inherit;
+  background-color: #eee;
+   padding-left: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .jumbotron {
+    padding-top: 10px;
+    padding-bottom: 10px;
+ padding-left: 10px;
+
+  }
+  .container .jumbotron,
+  .container-fluid .jumbotron {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .jumbotron h1,
+  .jumbotron .h1 {
+    font-size: 63px;
+  }
+}
+
+#map-container{
+	height: 600px;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

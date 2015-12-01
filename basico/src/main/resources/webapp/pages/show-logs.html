@@ -1,0 +1,112 @@
+<div class="row">
+    <!--Sidebar-->
+    <ng-include src="'pages/common/sidebar.html'"></ng-include>
+    <!--/Sidebar-->
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Log de aplicación</h3></div>
+            <div class="col-md-5">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>Dispositivo</strong></h5>
+                        <span>S54D5AS4D5AS4D5A</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h5><strong>Versión actual</strong></h5>
+                        <span>1.5.1</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h3>Logs más recientes</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Fecha y hora</th>
+                                <th>Nivel</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2015-06-20 08:00</td>
+                                <td>INFO</td>
+                                <td>Autenticación usuario 'jmartinez'</td>
+                            </tr>
+                            <tr>
+                                <td>2015-06-20 08:01</td>
+                                <td>INFO</td>
+                                <td>Cargando de ruta 'ruta1'</td>
+                            </tr>
+                            <tr>
+                                <td>2015-06-20 09:00</td>
+                                <td>INFO</td>
+                                <td>Dando de alta de incidnecia para parada 'parada 1'</td>
+                            </tr>
+                            <tr class="danger">
+                                <td>2015-06-20 09:00</td>
+                                <td>ERROR</td>
+                                <td>Error en la llamada al servicio de alta: Oracle Exeption</td>
+                            </tr>
+                            <tr>
+                                <td>2015-06-20 09:05</td>
+                                <td>INFO</td>
+                                <td>Dando de alta de incidnecia para parada 'parada 1'</td>
+                            </tr>
+                            <tr>
+                                <td>2015-06-20 09:05</td>
+                                <td>INFO</td>
+                                <td>Incidencia para parada 'parada 1' dada de alta correctamente</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h3>Descarga de logs</h3>
+                <div class="col-md-12 form-group">
+                    <div class="row">
+                        <form class="form-inline">
+                            <div class="form-group ">
+                                <label for="datetimepicker1">Fechas</label>
+                                <div class='input-group date'>
+                                    <input type='text' id='datetimepicker1' class="form-control" placeholder="dd/mm/aaaa" />
+                                    <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                <div class='input-group date' id='datetimepicker2'>
+                                    <input type='text' class="form-control" placeholder="dd/mm/aaaa" />
+                                    <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-download"></span> Descargar logs
+                                </button>
+                            </div>
+                            <div class="form-group">
+                                <a href="#/devices" class="btn btn-danger">Volver</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.input-group.date').datepicker({
+        language: "es"
+    });
+});
+</script>
